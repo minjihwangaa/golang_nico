@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"strings"
+
+	account "github.com/minjihwangaa/learngo/accounts"
 )
 
 //1.2 length, return
@@ -96,9 +98,21 @@ func main() {
 	// _, uppercase := nakedReturn("sie")
 	// fmt.Println(uppercase)
 	// fmt.Println(supperAdd(1,2,3,4,5) )
+
 	// fmt.Println(canIDrink(18))
 	// fmt.Println(canYouDrink(18))
+
 	// myPointers()
-	// ArraysSlices();
-	StructFunc()
+
+	// ArraysSlices()
+
+	// StructFunc()
+
+	// account := banking.Account{Owner: "nico", Balance: 1000}
+	// account.Owner ="pepe" // public struct variable can change
+	// fmt.Println(account)
+
+	account := account.NewAccount("nico")
+	fmt.Println(account)
+	
 }
