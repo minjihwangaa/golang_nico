@@ -114,5 +114,9 @@ func main() {
 
 	account := account.NewAccount("nico")
 	fmt.Println(account)
+	account.Deposit(10)
+	fmt.Println(account.Balance())
+	account.WithDraw(20)
+	fmt.Println(account.Balance())
 	
 }
