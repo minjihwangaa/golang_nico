@@ -1,5 +1,7 @@
 package account
 
+import "errors"
+
 // private
 // Account struct
 type Account struct {
@@ -19,11 +21,12 @@ func NewAccount(owner string) *Account {
 // Method - func (reciever) functionName (argument) returnType {}
 // reciever => Account에 연동되는 함수, 보통 축약어는 struct 이름 앞 소문자
 
-// 2.1 Deposit x amount on your account
+// 2.1 Method - amount on your account
 func (a *Account) Deposit(amount int) {
 	a.balance += amount
 }
 
+// 2.2 Method 
 func (a *Account) WithDraw(amount int) {
 	a.balance -= amount
 }
@@ -33,4 +36,11 @@ func (a Account) Balance() int {
 	return a.balance
 }
 
-
+// 2.2 Method - error handling
+func (a *Account) WithDraw2(amount int) error {
+	if a.balance < amount {
+		return errors.New("Can't with draw")
+	}
+	a.balance -= amount
+	return nil
+}

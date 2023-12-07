@@ -116,7 +116,15 @@ func main() {
 	fmt.Println(account)
 	account.Deposit(10)
 	fmt.Println(account.Balance())
-	account.WithDraw(20)
-	fmt.Println(account.Balance())
+	// account.WithDraw(20)
+	// fmt.Println(account.Balance())
+
 	
+	// account.WithDraw2(20) // Go는 exception이 없기 때문에 return 을 바로 출력하지 않음
+	err := account.WithDraw2(20)
+	if err != nil {
+		// log.Fatalln(err) // log.Fatalln => Println + kill 
+		fmt.Println(err)
+	}
+	fmt.Println(account.Balance())
 }
