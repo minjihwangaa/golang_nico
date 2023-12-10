@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	account "github.com/minjihwangaa/learngo/accounts"
 	"github.com/minjihwangaa/learngo/channels"
 )
 
@@ -113,30 +112,46 @@ func main() {
 	// account.Owner ="pepe" // public struct variable can change
 	// fmt.Println(account)
 
-	account := account.NewAccount("nico")
-	fmt.Println(account)
-	account.Deposit(10)
-	fmt.Println(account.Balance())
+	// account := account.NewAccount("nico")
+	// fmt.Println(account)
+	// account.Deposit(10)
+	// fmt.Println(account.Balance())
 	// account.WithDraw(20)
 	// fmt.Println(account.Balance())
 
 	
 	// account.WithDraw2(20) // Go는 exception이 없기 때문에 return 을 바로 출력하지 않음
-	err := account.WithDraw2(20)
-	if err != nil {
-		// log.Fatalln(err) // log.Fatalln => Println + kill 
-		fmt.Println(err)
-	}
-	fmt.Println(account.Balance())
+	// err := account.WithDraw2(20)
+	// if err != nil {
+	// 	// log.Fatalln(err) // log.Fatalln => Println + kill 
+	// 	fmt.Println(err)
+	// }
+	// fmt.Println(account.Balance())
 
 	// 3-3. Channels
-	c := make(chan bool)
+	// c := make(chan bool)
+	// people :=  [2]string{"nico","flynn"}
+	// for _, person := range people {
+	// 	go channels.IsSexy(person, c)
+	// }
+	// result := <-c
+	// fmt.Println(<-c)
+	// fmt.Println(<-c)
+	// fmt.Println(<-c) // println 3회 이상 하여 deadlock
+
+	// 3-4. Channels recap
+	// c <- : 채널로 부터 메시지를 얻는다
+	c := make(chan string)
 	people :=  [2]string{"nico","flynn"}
 	for _, person := range people {
-		go channels.IsSexy(person, c)
+		go channels.IsSexy2(person, c)
 	}
-	// result := <-c
-	fmt.Println(<-c)
-	fmt.Println(<-c)
-	fmt.Println(<-c)
+	// resultOne := <-c
+	// resultTwo := <-c
+	// fmt.Println(resultOne)
+	// fmt.Println(resultTwo)
+
+	for i:=0; i< len(people); i++ {
+		fmt.Println(<-c)
+	}
 }
