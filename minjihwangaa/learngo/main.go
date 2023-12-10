@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	account "github.com/minjihwangaa/learngo/accounts"
+	"github.com/minjihwangaa/learngo/channels"
 )
 
 //1.2 length, return
@@ -127,4 +128,15 @@ func main() {
 		fmt.Println(err)
 	}
 	fmt.Println(account.Balance())
+
+	// 3-3. Channels
+	c := make(chan bool)
+	people :=  [2]string{"nico","flynn"}
+	for _, person := range people {
+		go channels.IsSexy(person, c)
+	}
+	// result := <-c
+	fmt.Println(<-c)
+	fmt.Println(<-c)
+	fmt.Println(<-c)
 }
