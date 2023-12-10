@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 	"strings"
-
-	"github.com/minjihwangaa/learngo/channels"
 )
 
 //1.2 length, return
@@ -141,17 +139,19 @@ func main() {
 
 	// 3-4. Channels recap
 	// c <- : 채널로 부터 메시지를 얻는다
-	c := make(chan string)
-	people :=  [2]string{"nico","flynn"}
-	for _, person := range people {
-		go channels.IsSexy2(person, c)
-	}
+	// blocking operation: 프로그램, 메인함수가 뭔가 받기 전에 멈춘다
+	// c := make(chan string)
+	// people :=  [2]string{"nico","flynn"}
+	// for _, person := range people {
+	// 	go channels.IsSexy2(person, c)
+	// }
 	// resultOne := <-c
 	// resultTwo := <-c
-	// fmt.Println(resultOne)
+	// fmt.Println(resultOne) // blocking operation
 	// fmt.Println(resultTwo)
 
-	for i:=0; i< len(people); i++ {
-		fmt.Println(<-c)
-	}
+	// 3-5
+	// for i:=0; i< len(people); i++ {
+	// 	fmt.Println(<-c)
+	// }
 }
