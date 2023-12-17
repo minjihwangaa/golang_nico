@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	// "strings"
 )
 
@@ -87,6 +88,12 @@ import (
 // 	nico := person{name:"nico", age: 33, favFood: favFood}
 // 	fmt.Println(nico)
 // }
+
+type requestResult struct {
+    url string
+    status string
+}
+
 func main() {
 	// totalLen, _ := lenAndUpper("minji")
 	// fmt.Println(totalLen)
@@ -226,4 +233,39 @@ func main() {
 	// for i:=0; i< len(people); i++ {
 	// 	fmt.Println(<-c)
 	// }
+    
+    // 3-6
+    var results = make(map[string]string)
+    c := make(chan requestResult)
+    urls := []string{
+     "https://www.google.com",
+     "https://www.youtube.com",
+     "https://www.facebook.com",
+     "https://www.baidu.com",
+     "https://www.airbnb.com",
+    }
+    for _, url := range urls {
+        go HitURL2(url, c)
+    }
+
+    for i:=0; i < len(urls); i++ {
+        fmt.Println(<-c)
+        result := <-c
+        results[result.url] = result.status
+    }
+
+    for url, status := range results {
+        fmt.Println(url, status)
+    }
+}
+
+func HitURL2(url string, c chan<- requestResult) error{
+    resp, err := http.Get(url)
+    status := "OK"
+    if err != nil || resp.StatusCode>=400 {
+    status = "FAILED"
+    }else{
+    c <- requestResult{url: url, status: status}
+    }
+    return nil
 }
